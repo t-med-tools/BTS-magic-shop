@@ -10,7 +10,200 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Outfit:wght@300;400;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-color: #8A2BE2;
+            /* BlueViolet */
+            --secondary-color: #9370DB;
+            /* MediumPurple */
+            --accent-color: #E6E6FA;
+            /* Lavender */
+            --bg-dark: #120d1c;
+            --text-light: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow-soft: 0 8px 32px 0 rgba(138, 43, 226, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--primary-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background Animation */
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, #4b0082, transparent 50%),
+                radial-gradient(circle at 80% 70%, #8A2BE2, transparent 50%);
+            opacity: 0.4;
+            z-index: -1;
+            animation: pulseBackground 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseBackground {
+            0% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 0.6;
+            }
+        }
+
+        .container {
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            z-index: 10;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #E6E6FA, #D8BFD8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+        }
+
+        .subtitle {
+            color: #ccc;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Glassmorphism Card */
+        .glass-effect {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .card {
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(138, 43, 226, 0.3);
+        }
+
+        .quote-content {
+            width: 100%;
+        }
+
+        #quote-text {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        #quote-author {
+            font-weight: 600;
+            color: var(--secondary-color);
+            text-align: right;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        /* Button Styling */
+        .glow-button {
+            background: linear-gradient(135deg, #8A2BE2, #9370DB);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: inherit;
+            /* Use the same font as body */
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+            letter-spacing: 0.05em;
+        }
+
+        .glow-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.8);
+        }
+
+        .glow-button:active {
+            transform: scale(0.98);
+        }
+
+        footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animation Utilities */
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            #quote-text {
+                font-size: 1.2rem;
+            }
+
+            .card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -39,7 +232,58 @@
             <p>Borahae 💜</p>
         </footer>
     </div>
-    <script src="script.js"></script>
+    <script>
+        const quotes = [
+            { text: "自分を愛することを学びましょう。", author: "RM" },
+            { text: "夜明け前が一番暗い。遠い未来にお前が望むお前がいることを忘れないで。", author: "RM" },
+            { text: "夢がなくてもいいんです。幸せならそれで十分です。", author: "Suga" },
+            { text: "止まることも立ち止まることも、旅の一部だ。", author: "Suga" },
+            { text: "君の苦労は君自身が知っていればいい。", author: "Jin" },
+            { text: "明るい笑顔の裏には、いつも努力が隠されている。", author: "J-Hope" },
+            { text: "僕たちが一緒なら、砂漠も海になる。", author: "BTS" },
+            { text: "昨日の自分より、今日の自分が少しでも成長していたらそれでいい。", author: "Jimin" },
+            { text: "紫するよ (Borahae)。相手を信じてお互いに長く愛し合おうという意味です。", author: "V" },
+            { text: "失敗することは恥ずかしいことじゃない。立ち上がらないことが恥ずかしいことだ。", author: "Jungkook" },
+            { text: "後悔しないように生きよう。", author: "Jungkook" },
+            { text: "冬が来れば、必ず春も来る。", author: "BTS" },
+            { text: "自分自身の声に耳を傾けて。", author: "RM" },
+            { text: "あなたはそのままで十分美しい。", author: "Jimin" }
+        ];
+
+        const quoteText = document.getElementById('quote-text');
+        const quoteAuthor = document.getElementById('quote-author');
+        const generateBtn = document.getElementById('generate-btn');
+
+        function generateQuote() {
+            // Disable button temporarily to prevent spamming
+            generateBtn.disabled = true;
+
+            // Fade out
+            quoteText.style.opacity = 0;
+            quoteAuthor.style.opacity = 0;
+
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * quotes.length);
+                const quote = quotes[randomIndex];
+
+                quoteText.textContent = `"${quote.text}"`;
+                quoteAuthor.textContent = `- ${quote.author}`;
+
+                // Fade in
+                quoteText.style.opacity = 1;
+                quoteAuthor.style.opacity = 1;
+
+                // Re-enable button
+                generateBtn.disabled = false;
+            }, 500); // Wait for fade out
+        }
+
+        // Add transition style via JS or ensure CSS handles opacity transition
+        quoteText.style.transition = "opacity 0.5s ease";
+        quoteAuthor.style.transition = "opacity 0.5s ease";
+
+        generateBtn.addEventListener('click', generateQuote);
+    </script>
 </body>
 
 </html>
